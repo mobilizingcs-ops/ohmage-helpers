@@ -27,7 +27,6 @@ echo ""
 read -p "Base User ID (for lausd.xxxx, enter lausd): " baseuser
 read -p "Number of users to create: " numusers
 read -p "Class URN (defaults to urn:class:public): " classurn
-
 	#check if classurn was set
 	if [ -z "$classurn" ]
 	then
@@ -35,17 +34,7 @@ read -p "Class URN (defaults to urn:class:public): " classurn
 	else
   		class=$classurn
 	fi
-	#make sure we have some prepending zeros to make the usernames pretty.
-	case $numusers in
-	[1-9] )
-		z=1 ;;
-	[10-99] )
-		z=2 ;;
-	[100-999] )
-		z=3 ;;
-	[1000-9999] )
-		z=4 ;;
-	esac
+	z=${#numusers} #make sure we have prepending zeros to make usernames pretty.
 	#make ohmage_created file if it doesn't exist
 	if [ ! -f ohmage_created ]
 	then
