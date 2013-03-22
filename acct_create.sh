@@ -49,6 +49,10 @@ while [ $COUNTER -lt $numusers ]; do
 	zeros=`printf "%0${z}d" $COUNTER`
 	user=$baseuser.$zeros
 	pass=`curl -s http://makeagoodpassword.com/password/simple/ | sed 's/././5' | awk '{print toupper(substr($0,0,1))substr($0,2)}'`
+        if [ ${#pass} -lt 8 ] 
+        then
+            continue
+        fi
 	#curl to create user
 	a=`$curl "auth_token=$token&username=$user&password=$pass&client=curl&admin=false&enabled=true&new_account=false&campaign_creation_privilege=false" https://$servername/app/user/create`
 	if [[ "$a" == *success* ]]
