@@ -4,6 +4,8 @@
 #    SET @exclude_urns:='2014:.*shattuck:science.*|2014.*Morris.*P1|2014.*Torres.*P1|2014.*Torres.*P5|2014.*Torres.*P8|2014.*Dimonaco.*P3|2014.*Granados.*P1|2014.*Granados.*P3';
 #    SET @exclude_urns:=concat(@exclude_urns,'|2013.*Schlipp_P3|2013.*Gomez_P[2-9]|2013.*Ho|2013.*Shepard');
 #    SET @exclude_urns:=concat(@exclude_urns,'|Roosevelt.*ECS_P4.*');
+# ---------- dsummary_helper --------
+# depending on the parameters, generate proper regular expression to check for inclusion and exclusion. 
 DROP PROCEDURE IF EXISTS dsummary_helper;
 DELIMITER $$
 CREATE PROCEDURE dsummary_helper (
@@ -130,7 +132,10 @@ DELIMITER ;
 
 # ----------- top15classes ----------------------
 # Provide the same information as dsummary but the list is sorted based on total number of responses. 
+<<<<<<< HEAD
 # The output is sorted based on the # of survey responses
+=======
+>>>>>>> a65ea9e4546961ef059121713ff0e630015b5f1c
 
 DROP PROCEDURE IF EXISTS top15classes;
 DELIMITER $$
