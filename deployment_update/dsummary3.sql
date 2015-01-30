@@ -132,10 +132,7 @@ DELIMITER ;
 
 # ----------- top15classes ----------------------
 # Provide the same information as dsummary but the list is sorted based on total number of responses. 
-<<<<<<< HEAD
 # The output is sorted based on the # of survey responses
-=======
->>>>>>> a65ea9e4546961ef059121713ff0e630015b5f1c
 
 DROP PROCEDURE IF EXISTS top15classes;
 DELIMITER $$
