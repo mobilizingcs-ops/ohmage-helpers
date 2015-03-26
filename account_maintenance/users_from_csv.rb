@@ -38,7 +38,7 @@ csv.each do |u|
   end
   @password = gen_password
   oh.user_create(username: @username, password: @password, admin: false, enabled: true, new_account: true)
-  oh.user_update(username: @username, first_name: u[0], last_name: u[1], email_address: u[2], personal_id: rand(0..99999))
+  oh.user_update(username: @username, first_name: u[0], last_name: u[1], email_address: u[2], personal_id: rand(0..99999), organization: 'ucla')
   created_users << {username: @username, password: @password, first_name: u[0], last_name: u[1], email: u[2]}
 end
 
