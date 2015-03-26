@@ -45,7 +45,7 @@ Generates a bunch of users with supplied base. Useful for one-off studies where 
 None. Script will prompt for inputs
  
 #### Returns
-Created accounts with are returned to STDOUT in a 'csv' format.
+Created accounts are dropped in a file `ohmage_created` in csv format to the current directory.
 
 #### Example
 ```bash
