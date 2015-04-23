@@ -1,4 +1,4 @@
 ohmagetools
 ===========
 
-some helpful ohmage tools, mostly written in bash
+some helpful ohmage tools, mostly written in ~~bash~~ ruby.
