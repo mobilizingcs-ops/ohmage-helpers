@@ -7,7 +7,7 @@ def prompt(*args)
 end
 
 def gen_password
-  resp = HTTP.public_send(:get, 'http://makeagoodpassword.com/password/simple'))
+  resp = HTTP.public_send(:get, 'http://makeagoodpassword.com/password/simple')
   resp.body.to_s
 end
 
