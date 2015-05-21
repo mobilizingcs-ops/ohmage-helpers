@@ -31,6 +31,6 @@ class_lists.each do |c| # enumerate over class list to copy files.
   @students.each do |student|
     @student_db = File.join('/home/', student, '/.rstudio/history_database') # assumes rstudio history_databases are in /home/[user]/.rstudio/history_database
     @dest_file = File.join(@class_dir, "#{student}.txt") # destination looks like: base_dir/class_dir/student_acct_name.txt
-    FileUtils.cp(@student_db, @dest_file) unless !File.exist?(@student_db) # actually copy the file, but only if it exists.
+    FileUtils.cp(@student_db, @dest_file) if File.exist?(@student_db) # actually copy the file, but only if it exists.
   end
 end
