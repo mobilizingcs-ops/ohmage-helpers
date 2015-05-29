@@ -3,7 +3,7 @@ require 'http'
 
 def prompt(*args)
     print(*args)
-    gets
+    gets.chomp
 end
 
 def gen_password
@@ -26,7 +26,9 @@ count = prompt "Number of users to create: "
 urn = prompt "Class URN to add users to (urn:class:public if empty): "
 
 urn = 'urn:class:public' if urn.empty?
+count = count.to_i
 digits = count.to_s.size
+
 created_users = []
 
 count.times do |i|
