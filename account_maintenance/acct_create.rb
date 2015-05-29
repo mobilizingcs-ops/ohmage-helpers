@@ -8,7 +8,7 @@ end
 
 def gen_password
   resp = HTTP.public_send(:get, 'http://makeagoodpassword.com/password/simple')
-  resp.body.to_s
+  resp.body.to_s.delete(' ')
 end
 
 
