@@ -24,15 +24,19 @@ end
 base = prompt "Base user ID (for lausd-xxxxx, enter lausd-): "
 count = prompt "Number of users to create: "
 urn = prompt "Class URN to add users to (urn:class:public if empty): "
+starting_number = prompt "Number to start with (0 if left blank): "
 
 urn = 'urn:class:public' if urn.empty?
+starting_number = 0 if starting_number.empty?
 count = count.to_i
 digits = count.to_s.size
+starting_number = starting_number.to_i
 
 created_users = []
 
 count.times do |i|
-  @username = base + i.to_s.rjust(digits, '0')
+  @num = i + starting_number
+  @username = base + @num.to_s.rjust(digits, '0')
   @password = gen_password
   created_users << {username: @username, password: @password}
   oh.user_create(username: @username, password: @password, enabled: true, new_account: true, admin: false)
