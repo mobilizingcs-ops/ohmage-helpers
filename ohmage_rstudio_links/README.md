@@ -16,3 +16,21 @@ A set of directories (one per matched class) named according to the above argume
 
 #### Why??/How??
 These history databases can be used for analysis of student actions throughout the IDS curriculum, but knowing the class/teacher/student relationship is quite a bit more powerful than just having a single directory of all the files!
+
+## account_sync.rb
+Queries an ohmage database for distinct username/password hashes, checks for changes (new users, hashes that don't match the current hash) against a small [Daybreak](https://github.com/propublica/daybreak) database and push those changes to local linux accounts on a remote box.
+
+#### Arguments (edit script directly)
+  * `mysql_(host,user,password,db)` credentials for mysql server
+  * `mysql_user_query` returns a distinct list of username, password hash combos you need to sync. Note that you should avoid usernames that don't conform to linux local account standards (eg. no period(.) in username)
+  * `daybreak_db_file` location of the db file for persistence
+  * `ssh_(host,user,password,port)` ssh box to send user/pass updates to.
+
+#### Returns
+A log of how many new and changed users were operated on. Stick this in a crontab and go!
+
+#### Why??/How??
+As of this implementation, ohmage does not support external authentication and RStudio server pro version is required for nice external auth features. To reduce the friction of students logging in to RStudio, we've opted to periodically replicate the users found in ohmage to the linux local accounts on the rstudio vm. Please don't ever use this, it is a pretty awful stop-gap! :)
+
+#### Deps
+Just in case you do use this (above, I explicitly told you not to) you'll need to resolve some dependencies.  Make sure the remote system has `newusers` and `chpasswd` utils installed. Additionally, the remote system needs to have `libpam-unix2` installed to support the use of the blowfish hashes used in ohmage. Furthermore, don't use libpam-unix2 2.6 as it's broken. The project is now dead but you can grab the .deb file from [here](https://packages.debian.org/wheezy/admin/libpam-unix2).
