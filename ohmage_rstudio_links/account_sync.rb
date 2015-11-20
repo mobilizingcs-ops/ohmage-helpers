@@ -39,7 +39,7 @@ begin
       new_users.push(x)
     else
       if db[@username]['password'] != @password # if password hashes don't match, set new password to be synced.
-        changed_users.push(x) if db[@username]['password'] != @password
+        changed_users.push(x)
         db[@username] = x
       end
     end
