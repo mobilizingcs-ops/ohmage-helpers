@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'ohmage'
+# require 'syslog'
 
 users = %w(user1 user2 user3)
 class_match = Regexp.new(/:mobilize:(2014|2015|2016):(fall|spring)/)
@@ -30,6 +31,7 @@ unless update_classes.empty?
   user_role_list_add = users.join(';privileged,') + ';privileged' #haha.
   update_classes.each do |uc|
     oh.class_update(class_urn: uc, user_role_list_add: user_role_list_add)
-  end 
+  end
   puts "Added users to classes: #{update_classes.join(', ')}"
+  # Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.info "Added users to classes: #{update_classes.join(', ')}" }
 end
