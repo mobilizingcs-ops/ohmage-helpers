@@ -3,6 +3,7 @@
 require 'mysql2'
 require 'daybreak'
 require 'net/ssh'
+require 'syslog'
 
 
 # ohmage mysql location, user/pass source
@@ -58,7 +59,8 @@ begin
     end
   end
 rescue Exception => e # nice error handling, man.
-  p "#{Time.now.asctime()}: Sync Error, password sync potentially failed: #{e}"
+  Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.warning "#{Time.now.asctime()}: Sync Error, password sync potentially failed: #{e}" }
 end
 
-p "#{Time.now.asctime()}: Sync Finished. New Users(#{new_users.count}), Updated Passwords(#{changed_users.count})" # log details
+Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.info "#{Time.now.asctime()}: Sync Finished. New Users(#{new_users.count}), Updated Passwords(#{changed_users.count})" }
+

@@ -27,7 +27,7 @@ Queries an ohmage database for distinct username/password hashes, checks for cha
   * `ssh_(host,user,password,port)` ssh box to send user/pass updates to.
 
 #### Returns
-A log of how many new and changed users were operated on. Stick this in a crontab and go!
+A syslog entry of how many new and changed users were operated on. Stick this in a crontab and go!
 
 #### Why??/How??
 As of this implementation, ohmage does not support external authentication and RStudio server pro version is required for nice external auth features. To reduce the friction of students logging in to RStudio, we've opted to periodically replicate the users found in ohmage to the linux local accounts on the rstudio vm. Please don't ever use this, it is a pretty awful stop-gap! :)
