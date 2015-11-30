@@ -62,5 +62,6 @@ rescue Exception => e # nice error handling, man.
   Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.warning "#{Time.now.asctime()}: Sync Error, password sync potentially failed: #{e}" }
 end
 
-Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.info "#{Time.now.asctime()}: Sync Finished. New Users(#{new_users.count}), Updated Passwords(#{changed_users.count})" }
-
+if new_users.any? or changed_users.any?
+  Syslog.open($0, Syslog::LOG_PID | Syslog::LOG_CONS) { |s| s.info "#{Time.now.asctime()}: Sync Finished. New Users(#{new_users.count}), Updated Passwords(#{changed_users.count})" }
+end
