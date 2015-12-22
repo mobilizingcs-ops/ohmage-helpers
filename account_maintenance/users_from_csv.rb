@@ -2,6 +2,7 @@
 require 'ohmage'
 require 'http'
 require 'csv'
+require 'ruby-progressbar'
 
 # assume no headers for now
 csv = CSV.read(ARGV[0])
@@ -28,6 +29,8 @@ users = users.collect { |u| u.username }
 created_users = []
 # read the arrays from the csv:
 #  generate a username,password for each user, then add personal info to acct.
+# a fancy progress bar since this process can take a bit of time.
+progress = ProgressBar.create(:title => "Creating Accounts", :starting_at => 0, :total => csv.count)
 csv.each do |u|
   # find a non-existent username for this user
   begin
@@ -40,6 +43,7 @@ csv.each do |u|
   oh.user_create(username: @username, password: @password, admin: false, enabled: true, new_account: true)
   oh.user_update(username: @username, first_name: u[0], last_name: u[1], email_address: u[2], personal_id: rand(0..99999), organization: 'ucla')
   created_users << {username: @username, password: @password, first_name: u[0], last_name: u[1], email: u[2]}
+  progress.increment
 end
 
 # add them all to a class in a bulk call.

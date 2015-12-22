@@ -1,5 +1,6 @@
 require 'ohmage'
 require 'http'
+require 'ruby-progressbar'
 
 def prompt(*args)
     print(*args)
@@ -10,7 +11,6 @@ def gen_password
   resp = HTTP.public_send(:get, 'http://makeagoodpassword.com/password/simple')
   resp.body.to_s.delete(' ')
 end
-
 
 # create ohmage client to use for account creation. feel free to change this however you please.
 # doing this so I can check it in to source code.
@@ -34,12 +34,14 @@ starting_number = starting_number.to_i
 
 created_users = []
 
+progress = ProgressBar.create(:title => "Creating Accounts", :starting_at => 0, :total => count)
 count.times do |i|
   @num = i + starting_number
   @username = base + @num.to_s.rjust(digits, '0')
   @password = gen_password
   created_users << {username: @username, password: @password}
   oh.user_create(username: @username, password: @password, enabled: true, new_account: true, admin: false)
+  progress.increment
 end
 
 # add users to class all at once
