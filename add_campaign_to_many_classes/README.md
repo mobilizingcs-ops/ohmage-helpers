@@ -1,4 +1,18 @@
-# Add single campaign to many classes
+# add_campaign_to_classes.rb
+
+This script will create a version of a campaign for each class matched. Given:
+  * an campaign xml file on disk
+  * regex to match ohmage class urns found on this particular server
+  * A campaign name to use for this campaign.  Please keep this short, memorable and without special characters.
+
+You can also adjust the regex of the name/urn matchers to fit a pattern unlike the one we happen to be using (check out the file for an example of our name/urns and how the file gets matched.)
+
+If you happen to request the use of an xml file that has a `<campaignName>` or `<campaignUrn>` tag, the script will die and ask you to remove them.
+
+# add_campaign_to_class.sh
+
+** A legacy shell script to awkwardly and buggily do this **
+
 This script will take two arguments on the command line to add the second argument (a campaign xml file) to a set of classes (a file with one class urn per line).
 
 Please note:
