@@ -35,6 +35,8 @@ all_classes.each do |c|
   next
 end
 
+oh = Ohmage::Client.new() # assumes you have ohmage env variables set like other scripts
+
 match_classes.each do |c|
   match_name = match_class_name.match(c.name)
   match_urn = match_class_urn.match(c.urn)
