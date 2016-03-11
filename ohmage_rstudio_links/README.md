@@ -34,3 +34,16 @@ As of this implementation, ohmage does not support external authentication and R
 
 #### Deps
 Just in case you do use this (above, I explicitly told you not to) you'll need to resolve some dependencies.  Make sure the remote system has `newusers` and `chpasswd` utils installed. Additionally, the remote system needs to have `libpam-unix2` installed to support the use of the blowfish hashes used in ohmage. Furthermore, don't use libpam-unix2 2.6 as it's broken. The project is now dead but you can grab the .deb file from [here](https://packages.debian.org/wheezy/admin/libpam-unix2).
+
+## reset-rstudio-session.rb
+Not really an ohmage helper at all. only used for rstudio. It destroys and recreates a user's `.rstudio` directory (while saving their history!)
+
+#### Arguments
+  * pass username as first argument when invoking (eg. `./reset-rstudio-session.rb <username here>`)
+  * alternately, if you pass no arguments, you'll be prompted to enter the username.
+
+#### Returns
+nil or error if something fails.
+
+#### Why??/How??
+We've seen some odd issues where a user's rstudio session can get messed up.  The script is a little heavy-handed as only part of the directory needs to be deleted, but it works for now.
