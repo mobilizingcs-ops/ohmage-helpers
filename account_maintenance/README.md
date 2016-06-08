@@ -52,3 +52,25 @@ Created accounts are dropped in a file `ohmage_created` in csv format to the cur
 ./acct_create.sh
 ```
 will help you create some accounts!
+
+## teachers_from_csv_lausd.rb
+Generates accounts with teacher-like permissions. Nearly identical to `users_from_csv.rb` above, but with a few extra options that cater toward the "LAUSD" use case.
+
+#### Arguments
+  * path to csv file (currently requires that **no header be present** and ordered as first_name,last_name,email_address)
+    * expected CSV order: `employee_id,first_name,last_name,email,school_name
+  * urn of pre-existing class to add users to (will add them as restricted)
+  * base of random username (defaults to `lausd-` if 3rd argument is not found)
+ 
+#### Returns
+Created accounts with personal info are returned to STDOUT. Feel free to pipe this to an actual csv file if you wish!
+
+#### Example
+```bash
+# first set environment variables based on the server you want to use:
+export OHMAGE_SERVER_URL = 'https://test.mobilizingcs.org/'
+export OHMAGE_USER = 'testuser'
+export OHMAGE_PASSWORD = 'testpass'
+ruby user_from_csv.rb /path/to/file.csv urn:class:public
+```
+will create accounts like `lausd-58679` in class urn:class:public (which usually exists as a default on ohmage servers) for each line listed in /path/to/file.csv. These teachers will have `user_setup` and class_create` privileges.
