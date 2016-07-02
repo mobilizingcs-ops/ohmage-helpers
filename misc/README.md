@@ -12,3 +12,6 @@ Assuming you have the https://github.com/mobilizingcs/teacher source checked out
 
 ## ohmage_update_216_217.sh
 A bit of extra help is needed for ohmage to update from 2.16 to 2.17. This "script" handles upgrading ohmage 2.16 to 2.17 (assuming your directory structure is like the `apt-get install` way please don't run this like a script, though, best to do the commands one at a time! Note: this upgrades to ohmage 2.17.3, which includes some campaign validation bug fixes. If you're concerned that you may have a malformed campaign on your server (in particular, a survey with single/multi-choice prompts that do not have any options) you may want to take a look at this script first: https://github.com/mobilizingcs-ops/ohmage-helpers/tree/master/xml (it requires a ruby executable, and the ohmage gem).  You can also manually check your campaigns for this issue if you have very few. 
+
+## export_campaign_data.rb
+Assuming the user is an admin, this script makes a call to `oh.campaign_search` to get a list of all campaigns in the server. After obtaining the list, it makes subsequent calls for each campaign to export the csv and any images associated with the survey response data.
